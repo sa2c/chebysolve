@@ -11,3 +11,10 @@ The matrix-vector multiplier is accelerated with Numba. Currently this is CPU-on
 Tested using Hypothesis.
 
 An example of usage can be found in `chebysolve_example.ipynb`.
+
+![European Regional Development Fund logo](https://tfw.gov.wales/sites/default/files/inline-images/ERDF2.jpg)
+This project was developed with support from the [Supercomputing Wales][scw] programme, which is part-funded by the [European Regional Development Fund][erdf] (ERDF) through the [Welsh Government][welsh-gov].
+
+[erdf]: https://ec.europa.eu/regional_policy/en/funding/erdf/
+[scw]: https://supercomputing.wales
+[welsh-gov]: https://gov.wales
