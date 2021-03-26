@@ -12,7 +12,8 @@ Tested using Hypothesis.
 
 An example of usage can be found in `chebysolve_example.ipynb`.
 
-![European Regional Development Fund logo](https://tfw.gov.wales/sites/default/files/inline-images/ERDF2.jpg)
+<img src="https://tfw.gov.wales/sites/default/files/inline-images/ERDF2.jpg" alt="European Regional Development Fund logo" width="150">
+
 This project was developed with support from the [Supercomputing Wales][scw] programme, which is part-funded by the [European Regional Development Fund][erdf] (ERDF) through the [Welsh Government][welsh-gov].
 
 [erdf]: https://ec.europa.eu/regional_policy/en/funding/erdf/
