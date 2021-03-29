@@ -18,7 +18,8 @@ from numba import jit, prange, float64, complex128
 @jit(
     [dtype[:](dtype[:, :], dtype[:]) for dtype in (float64, complex128)],
     nopython=True,
-    parallel=True
+    parallel=True,
+    fastmath=True
 )
 def iterate_vector(matrix, vector):
     '''
