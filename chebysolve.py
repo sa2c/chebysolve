@@ -8,7 +8,9 @@ Author: Ed Bennett, 2020-03-26
 Contact: e.j.bennett@swansea.ac.uk
 """
 
-from numpy import complexfloating, floating, integer, issubdtype, zeros_like
+from numpy import (
+    complexfloating, floating, integer, issubdtype, zeros_like, zeros
+)
 from numpy.linalg import norm
 from numpy.random import default_rng
 
@@ -27,11 +29,15 @@ def iterate_vector(matrix, vector):
     I.e. perform one Chebyshev iteration.
     '''
 
+    intermediate = zeros(matrix.shape[1], dtype=vector.dtype)
+    for k in prange(matrix.shape[1]):
+        for j in range(len(vector)):
+            intermediate[k] += matrix[j, k] * vector[j]
+
     result = zeros_like(vector)
     for i in prange(len(vector)):
-        for j in range(len(vector)):
-            for k in range(matrix.shape[1]):
-                result[i] += matrix[i, k] * matrix[j, k] * vector[j]
+        for k in range(matrix.shape[1]):
+            result[i] += matrix[i, k] * intermediate[k]
 
     return result
 

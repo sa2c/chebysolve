@@ -19,12 +19,10 @@ def iterate_vector_numpy(matrix, vector):
     Return the product ``matrix`` * ``matrix``^T * ``vector``.
     I.e. perform one Chebyshev iteration.
 
-    This implementatation does not parallelise and gets very slow
-    at large matrix sizes.
+    This implementatation does not parallelise.
     '''
 
-    # Expressed in indices: \sum_{j,k} A_ik A_jk y_j
-    return einsum('ik,jk,j->i', matrix, matrix, vector)
+    return matrix @ (matrix.T @ vector)
 
 
 @composite
@@ -38,8 +36,10 @@ def matrix_and_vector(
     Generate a matrix and vector with compatible shapes to multiply.
     '''
     actual_shape = draw(matrix_shape)
-    matrix = draw(arrays(float64, actual_shape))
-    vector = draw(arrays(float64, actual_shape[0]))
+    matrix = draw(arrays(float64, actual_shape,
+                         elements=floats(min_value=1e-10, max_value=1e10)))
+    vector = draw(arrays(float64, actual_shape[0],
+                         elements=floats(min_value=1e-10, max_value=1e10)))
     return matrix, vector
 
 
@@ -52,7 +52,7 @@ def test_numba_vs_numpy(matrix_vector):
     matrix, vector = matrix_vector
 
     result = chebysolve.iterate_vector(matrix, vector)
-    assume((result < 1e10).all())
+    assume((result < 1e20).all())
     assert_allclose(result, iterate_vector_numpy(matrix, vector), rtol=1e-6)
     assert_allclose(result, matrix @ matrix.T @ vector, rtol=1e-6)
 
